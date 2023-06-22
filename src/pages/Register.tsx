@@ -1,10 +1,10 @@
-import { LoginForm } from "components";
+import { RegisterForm } from "components";
 import { LandingLayout } from "layout/Landing";
 
-export const LandingPage = () => {
+export const RegisterPage = () => {
   return (
     <LandingLayout>
-      <LoginForm />
+      <RegisterForm />
     </LandingLayout>
   );
 };

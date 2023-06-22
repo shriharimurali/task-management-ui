@@ -1,20 +1,20 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Action, Input } from "components/general";
-import { login } from "api/auth";
+import { LoginPayload, login } from "api/auth";
 
-export const Login = () => {
+export const LoginForm = () => {
   const navigate = useNavigate();
 
   const { register, handleSubmit, formState, reset } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmitHandler = async (data: { email: string; password: string }) => {
-    const res = await login(data);
+  const onSubmitHandler = async (formData: LoginPayload) => {
+    const res = await login(formData);
     if (res.accessToken) {
       reset();
       navigate("/dashboard");
@@ -50,14 +50,21 @@ export const Login = () => {
         />
 
         <Input
+          type="password"
           leftIcon="/icons/password.svg"
           formState={formState}
           placeHolder="Password"
           {...register("password")}
         />
 
-        <Action text="Log in"></Action>
+        <Action text="Log in" />
       </form>
+      <p>
+        Not a member a yet?{" "}
+        <span className="font-bold text-violet-500">
+          <Link to={"/sign-up"}>Register here</Link>
+        </span>
+      </p>
     </div>
   );
 };
