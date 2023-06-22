@@ -1,9 +1,12 @@
+import { Suspense } from "react";
 import { AppRouter } from "router";
 
 function App() {
   return (
     <div className="w-full min-h-screen">
-      <AppRouter />
+      <Suspense fallback={<div>Loading....</div>}>
+        <AppRouter />
+      </Suspense>
     </div>
   );
 }
